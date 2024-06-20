@@ -1,4 +1,6 @@
 import {createServer} from "node:http";
+import {unlink, writeFile} from "node:fs"; //This particular unlink iport lesson was done on Wednesday June 18th
+
 
 // // Define request handler
 // function requestHandler(req, res) {
@@ -69,11 +71,24 @@ import {createServer} from "node:http";
 
 
 
-// Using the console.log(req.url)
+// Using the console.log(req.url) to create an HTTP server
 const server = createServer((req, res) => { /*the requestHander function name has been taken out*/
-    console.log(req.url)
-    res.writeHead(200, {"Content-Type": "text/html"});
-    res.end("<h1>We have an HTTP Server</h1>")
+    console.log(req.url);
+    if (req.url.includes("create")) {
+        // Create file
+        writeFile("./index.html", "<h1>Leaning Node.js</h1>", () => {
+           
+        // Return response
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.end("<h1>We have an HTTP Server</h1>");
+        });
+    } else {
+        // delete file
+        unlink("./index.html", () => {
+        console.log("File deleted!")
+    });
+};
+    
 });
 
 // Listen for incoming request
