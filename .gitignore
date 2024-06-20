@@ -1,0 +1,7 @@
+# the following files are added to gitignore due to security reasons
+node_modules 
+package-lock.json
+yarn.lock 
+
+#yarn is not part of the files I have, but it is locked because during collaboration, other users that have yarn.lock can push their files to you, which is unwanted
+
